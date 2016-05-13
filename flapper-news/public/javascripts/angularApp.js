@@ -48,6 +48,7 @@ app.controller('MainCtrl', [
 			});
 
 		$scope.title = '';
+		$scope.link = '';
 	};
 
 	$scope.incrementUpvotes = function(post) {
@@ -63,7 +64,7 @@ app.controller('PostsCtrl', [
 		$scope.post = posts.posts[$stateParams.id];
 
 		$scope.addComment = function() {
-			if(!$scope.body === '') {return;}
+			if($scope.body === '') {return;}
 			$scope.post.comments.push({
 				body: $scope.body, 
 				author: 'user', 
