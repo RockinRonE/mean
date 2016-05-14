@@ -1,9 +1,15 @@
 var express = require('express');
 var router = express.Router();
+/* GET home page. */
+router.get('/', function(req, res) {
+  res.render('index', { title: 'Express' });
+});
 
 var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
+
+
 
 /* GET posts page. */
 router.get('/posts', function(req, res, next) {
@@ -18,7 +24,7 @@ router.get('/posts', function(req, res, next) {
 router.post('/posts', function(req, res, next) {
 	var post = new Post(req.body); 
 
-	post.save(function(err,post) {
+	post.save(function(err, post) {
 		if(err) {return next(err);}
 
 		res.json(post);
@@ -60,6 +66,18 @@ router.put('/posts/:post/upvote', function(req, res, next) {
 	});
 });
 
+/* Preload comment Obj on routes w/ :comment */
+router.param('comment', function(req, res, next, id) {
+	var query = Comment.findById(id);
+
+	query.exec(function(err, comment) {
+		if(err) {return next(err);}
+		if(!comment) { return next(new Error('can\'t find comment'));}
+
+		req.comment = comment;
+		return next(); 
+	});
+});
 /* comments route for particular post */
 
 router.post('/posts/:post/comments', function(req, res, next) {
@@ -79,23 +97,12 @@ router.post('/posts/:post/comments', function(req, res, next) {
 });
 
 
-/* load comment Obj */
-router.param('comment', function(req, res, next, id) {
-	var query = Comment.findById(id);
 
-	query.exec(function(err, comment) {
-		if(err) {return next(err);}
-		if(!comment) { return next(new Error('can\'t find comment'));}
-
-		req.comment = comment;
-		return next(); 
-	});
-});
 
 /* upvote comment */
 
 router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
-	req.comment.comment.upvote(function(err, comment) {
+	req.comment.upvote(function(err, comment) {
 		if(err) { return next(err); }
 
 		res.json(comment); 
