@@ -1,9 +1,15 @@
 var express = require('express');
 var router = express.Router();
+/* GET home page. */
+router.get('/', function(req, res) {
+  res.render('index', { title: 'Express' });
+});
 
 var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
+
+
 
 /* GET posts page. */
 router.get('/posts', function(req, res, next) {
@@ -18,7 +24,7 @@ router.get('/posts', function(req, res, next) {
 router.post('/posts', function(req, res, next) {
 	var post = new Post(req.body); 
 
-	post.save(function(err,post) {
+	post.save(function(err, post) {
 		if(err) {return next(err);}
 
 		res.json(post);
