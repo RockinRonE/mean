@@ -19,7 +19,7 @@
       <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
     </ul>
   </nav>
-  
+
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <ui-view></ui-view>
@@ -44,6 +44,11 @@
             {{post.title}}
           </span>
           
+          <span ng-show="post.author">
+            posted by <a>{{post.author}}</a>
+          </span>
+          
+      
         </span>
 
       <span>
@@ -51,9 +56,13 @@
       </span>
       
     </div>
+    
+    <div ng-hide="isLoggedIn()">
+      <h3>You need to <a href="/#/login">Login</a> or <a href="/#/register">Register</a> before you can add a post.</h3>
+    </div>
 
-      <form ng-submit="addPost()"
-        style="margin-top:30px;">
+      <form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top:30px">
+        
         <h3>Add a new post</h3>
 
         <div class="form-group">
@@ -91,10 +100,16 @@
       <span style="font-size:20px; margin-left:10px;">
         {{comment.body}}
       </span>
-    </div>
 
-    <form ng-submit="addComment()"
-      style="margin-top:30px;">
+    </div>
+      <div ng-hide="isLoggedIn()">
+        <h3>You need to <a href="/#/login">Login</a> or <a href="/#/register">Register</a> before you can comment.</h3>
+      </div>
+
+
+
+
+    <form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">
       <h3>Add a new comment</h3>
 
       <div class="form-group">
@@ -116,8 +131,7 @@
     <span>{{ error.message }}</span>
   </div>
 
-  <form ng-submit="register()"
-    style="margin-top:30px;">
+  <form ng-submit="register()" style="margin-top:30px;">
     <h3>Register</h3>
 
     <div class="form-group">
@@ -145,8 +159,7 @@
     <span>{{ error.message }}</span>
   </div>
 
-  <form ng-submit="logIn()"
-    style="margin-top:30px;">
+  <form ng-submit="logIn()" style="margin-top:30px;">
     <h3>Log In</h3>
 
     <div class="form-group">
