@@ -106,6 +106,15 @@ router.put('/posts/:post/upvote', auth, function(req, res, next) {
 	});
 });
 
+/* downvote post */
+router.put('/posts/:post/downvote', auth, function(req, res, next){
+	req.post.downvote(function(err, post) {
+		if(err) {return next(err);}
+
+		res.json(post);
+	});
+});
+
 /* Preload comment Obj on routes w/ :comment */
 router.param('comment', function(req, res, next, id) {
 	var query = Comment.findById(id);
