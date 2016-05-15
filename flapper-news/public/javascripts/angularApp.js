@@ -34,7 +34,7 @@ app.config([
 				controller: 'AuthCtrl',
 				onEnter: ['$state', 'auth', function($state, auth){
 					if(auth.isLoggedIn()) {
-						$stae.go('home');
+						$state.go('home');
 					}
 				}]
 			})
@@ -131,6 +131,16 @@ app.factory('posts', ['$http', 'auth', function($http, auth) {
 		});
 	};
 
+	o.downvote = function(post) {
+		return $http.put('/posts/' + post._id + '/downvote', null, {
+			headers: {Authorization: 'Bearer ' +auth.getToken()}
+		}).success(function(data) {
+			post.upvotes -= 1; 
+		});
+	};
+	
+
+
 	//retrieves single post
 	o.get = function(id) {
 		return $http.get('/posts/' + id).then(function(res){
@@ -209,6 +219,10 @@ app.controller('MainCtrl', [
 
 	$scope.incrementUpvotes = function(post) {
 		posts.upvote(post);
+	};
+
+	$scope.downvote = function(post) {
+		posts.downvote(post);
 	};
 
 }]);
