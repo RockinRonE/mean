@@ -54,12 +54,14 @@
           <span ng-show="post.author">
             posted by <a>{{post.author}}</a>
           </span>
+
+          
           
       
         </span>
 
       <span>
-        <a href="#/posts/{{post._id}}">Comments</a>
+        <a href="#/posts/{{post._id}}">Comments ({{post.comments.length}})</a>
       </span>
       
     </div>

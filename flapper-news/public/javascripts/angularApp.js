@@ -264,6 +264,7 @@ app.controller('PostsCtrl', [
 			posts.upvoteComment(post, comment);
 		};
 
+
 		$scope.body = '';
 
 	};
