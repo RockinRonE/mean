@@ -36,7 +36,7 @@
       <div ng-repeat="post in posts | orderBy:'-upvotes'">
 
         <span class="glyphicon glyphicon-thumbs-up"
-          ng-click="incrementUpvotes(post)"></span>
+          ng-click="incrementUpvotes(post)" ng-style="post.hadUpvoted ? {color: 'red'} : {}"></span>
         {{post.upvotes}}
 
         <span class="glyphicon glyphicon-thumbs-down" ng-click="downvote(post)" 

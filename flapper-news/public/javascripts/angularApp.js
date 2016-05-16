@@ -224,6 +224,7 @@ app.controller('MainCtrl', [
 		if(!upvoted) {
 			posts.upvote(post);
 			upvoted = true; 
+			post.hadUpvoted = true; 
 		}
 	};
 
