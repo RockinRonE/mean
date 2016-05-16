@@ -71,9 +71,9 @@
     </div>
 
   
-    <button type="submit" ng-click="showPostForm = !showPostForm" ng-show="showPostForm" class="btn btn-primary" style="margin-top:30px">Post Something </button>
+    <button type="submit" ng-click="showPostForm = !showPostForm" ng-hide="showPostForm" class="btn btn-primary" style="margin-top:30px">Post Something </button>
 
-    <div ng-hide="showPostForm">
+    <div ng-show="showPostForm">
       <form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top:30px">
         
         <h3>Add a new post</h3>
@@ -124,7 +124,9 @@
 
 
 
+  <button type="submit" ng-click="showCommentForm = !showCommentForm" ng-hide="showCommentForm" class="btn btn-primary" style="margin-top:30px">Leave a Comment</button>
 
+  <div ng-show="showCommentForm">
     <form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">
       <h3>Add a new comment</h3>
 
@@ -136,6 +138,9 @@
       </div>
       <button type="submit" class="btn btn-primary">Post</button>
     </form>
+  </div> 
+
+
   </script>
 
   <script type="text/ng-template" id="/register.html">

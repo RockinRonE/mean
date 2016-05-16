@@ -206,6 +206,11 @@ app.controller('MainCtrl', [
 	 	$scope.posts = posts.posts; 
 	 	$scope.isLoggedIn = auth.isLoggedIn; 
 
+	 	// var showPostForm; 
+	 	// $scope.showPostForm = function() {
+	 	// 	showPostForm = true; 
+	 	// }
+
 		$scope.addPost = function() {
 			if(!$scope.title || $scope.title === '') {return;}
 			posts.create({
