@@ -206,6 +206,8 @@ app.controller('MainCtrl', [
 	 	$scope.posts = posts.posts; 
 	 	$scope.isLoggedIn = auth.isLoggedIn; 
 
+
+
 		$scope.addPost = function() {
 			if(!$scope.title || $scope.title === '') {return;}
 			posts.create({
@@ -217,13 +219,25 @@ app.controller('MainCtrl', [
 		$scope.link = '';
 	};
 
+	var upvoted;
 	$scope.incrementUpvotes = function(post) {
-		posts.upvote(post);
+		if(!upvoted) {
+			posts.upvote(post);
+			upvoted = true; 
+			post.hadUpvoted = true; 
+		}
 	};
 
+	var downvoted; 
 	$scope.downvote = function(post) {
-		posts.downvote(post);
+		if (!downvoted) {
+			posts.downvote(post);
+			downvoted = true;
+			post.hadDownvoted = true;  
+		}
 	};
+
+	
 
 }]);
 
