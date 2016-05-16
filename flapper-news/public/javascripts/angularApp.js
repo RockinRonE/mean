@@ -221,8 +221,12 @@ app.controller('MainCtrl', [
 		posts.upvote(post);
 	};
 
+	var downvoted; 
 	$scope.downvote = function(post) {
-		posts.downvote(post);
+		if (!downvoted) {
+			posts.downvote(post);
+			downvoted = true; 
+		}
 	};
 
 }]);
