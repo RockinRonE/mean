@@ -70,6 +70,10 @@
       <h3>You need to <a href="/#/login">Login</a> or <a href="/#/register">Register</a> before you can add a post.</h3>
     </div>
 
+  
+    <button type="submit" ng-click="showPostForm = !showPostForm" ng-hide="showPostForm" class="btn btn-primary" style="margin-top:30px">Post Something </button>
+
+    <div ng-show="showPostForm">
       <form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top:30px">
         
         <h3>Add a new post</h3>
@@ -88,7 +92,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Post</button>
       </form>
+    </div>
+
   </script>
+
 
   <script type="text/ng-template" id="/posts.html">
     <div class="page-header">
@@ -117,7 +124,9 @@
 
 
 
+  <button type="submit" ng-click="showCommentForm = !showCommentForm" ng-hide="showCommentForm" class="btn btn-primary" style="margin-top:30px">Leave a Comment</button>
 
+  <div ng-show="showCommentForm">
     <form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">
       <h3>Add a new comment</h3>
 
@@ -126,38 +135,48 @@
         class="form-control"
         placeholder="Comment"
         ng-model="body"></input>
+
+        <input type="text"
+        class="form-control"
+        placeholder="Name"
+        style="margin-top:10px;" 
+        ng-model="author"></input>
+
       </div>
       <button type="submit" class="btn btn-primary">Post</button>
     </form>
+  </div> 
+
+
   </script>
 
   <script type="text/ng-template" id="/register.html">
-  <div class="page-header">
-    <h1>Flapper News</h1>
-  </div>
-
-  <div ng-show="error" class="alert alert-danger row">
-    <span>{{ error.message }}</span>
-  </div>
-
-  <form ng-submit="register()" style="margin-top:30px;">
-    <h3>Register</h3>
-
-    <div class="form-group">
-      <input type="text"
-      class="form-control"
-      placeholder="Username"
-      ng-model="user.username"></input>
+    <div class="page-header">
+      <h1>Flapper News</h1>
     </div>
-    <div class="form-group">
-      <input type="password"
-      class="form-control"
-      placeholder="Password"
-      ng-model="user.password"></input>
+
+    <div ng-show="error" class="alert alert-danger row">
+      <span>{{ error.message }}</span>
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-  </form>
-</script>
+
+    <form ng-submit="register()" style="margin-top:30px;">
+      <h3>Register</h3>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Username"
+        ng-model="user.username"></input>
+      </div>
+      <div class="form-group">
+        <input type="password"
+        class="form-control"
+        placeholder="Password"
+        ng-model="user.password"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+  </script>
 
 <script type="text/ng-template" id="/login.html">
   <div class="page-header">
