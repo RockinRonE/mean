@@ -206,10 +206,6 @@ app.controller('MainCtrl', [
 	 	$scope.posts = posts.posts; 
 	 	$scope.isLoggedIn = auth.isLoggedIn; 
 
-	 	// var showPostForm; 
-	 	// $scope.showPostForm = function() {
-	 	// 	showPostForm = true; 
-	 	// }
 
 		$scope.addPost = function() {
 			if(!$scope.title || $scope.title === '') {return;}
@@ -222,26 +218,23 @@ app.controller('MainCtrl', [
 		$scope.link = '';
 	};
 
-	var upvoted;
+
 	$scope.incrementUpvotes = function(post) {
-		if(!upvoted) {
+		if(!post.hadUpvoted) {
 			posts.upvote(post);
 			upvoted = true; 
 			post.hadUpvoted = true; 
 		}
 	};
 
-	var downvoted; 
+	
 	$scope.downvote = function(post) {
-		if (!downvoted) {
+		if (!post.hadDownvoted) {
 			posts.downvote(post);
 			downvoted = true;
 			post.hadDownvoted = true;  
 		}
 	};
-
-	
-
 }]);
 
 app.controller('PostsCtrl', [
@@ -258,7 +251,7 @@ app.controller('PostsCtrl', [
 			if($scope.body === '') {return;}
 			posts.addComment(post._id, {
 				body: $scope.body, 
-				author: 'user', 
+				// author: '', 
 			}).success(function(comment) {
 				$scope.post.comments.push(comment);
 			});
